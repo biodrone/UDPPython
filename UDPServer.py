@@ -34,12 +34,14 @@ def listener():
         sockR.bind((UDP_IP_R, UDP_PORT_R))
 
         data, addr = sockR.recvfrom(1024) # buffer size is 1024 bytes
+        sockR.close()
         print "New Worker:", data
         workers += 1
     exit = 1
     return
 def checker(): ## TODO: Accept a URL as input maybe?
     while exit == 0:
+        print 'Parsing...'
         global cmd
         url = "http://176.31.191.50/index.html"
         response = urllib2.urlopen(url)
@@ -47,6 +49,7 @@ def checker(): ## TODO: Accept a URL as input maybe?
         soup = BeautifulSoup(html)
 
         cmd = len(soup.a.string) # gets the length of the first name
+        print 'Parsing result is', cmd
         time.sleep(10)
     return
 s = threading.Thread(name='Sender', target=sender)
