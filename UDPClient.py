@@ -18,12 +18,16 @@ def sender(): # client sender only sends once, on WAN might need more
     return
 def listener():
 	print 'Listening...'
+	try:
+		sockR = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		sockR.bind((UDP_IP_R, UDP_PORT_R))
+		sockR.settimeout(5)
 
-	sockR = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	sockR.bind((UDP_IP_R, UDP_PORT_R))
-
-  	data, addr = sockR.recvfrom(1024) # buffer size is 1024 bytes
-   	print "Connected to Controller:", data
+	  	data, addr = sockR.recvfrom(1024) # buffer size is 1024 bytes
+	   	print "Connected to Controller:", data
+   	except socket.timeout:
+   		print 'timeout: client exiting'
+   		sockR.close()
 
 s = threading.Thread(name='Sender', target=sender)
 l = threading.Thread(name='Listener', target=listener)
