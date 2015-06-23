@@ -21,7 +21,7 @@ def listener():
 	try:
 		sockR = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		sockR.bind((UDP_IP_R, UDP_PORT_R))
-		sockR.settimeout(5)
+		sockR.settimeout(5) # sets timeout in case server is off
 
 	  	data, addr = sockR.recvfrom(1024) # buffer size is 1024 bytes
 	   	print "Connected to Controller:", data

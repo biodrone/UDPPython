@@ -14,7 +14,7 @@ MESSAGE = socket.gethostname()
 workers = 0
 exit = 0
 
-def sender():
+def sender(): # sends until something changes exit to 1
     global exit
     print 'Sending...'
     while exit == 0:
@@ -33,13 +33,6 @@ def listener():
         data, addr = sockR.recvfrom(1024) # buffer size is 1024 bytes
         print "New Worker:", data
         workers += 1
-
-        if data == 1:
-            print 'message = 1'
-        elif data == 2:
-            print 'message = 2'
-        elif data == 3:
-            print 'message = 3'
     exit = 1
     return
 
