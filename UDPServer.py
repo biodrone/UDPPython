@@ -38,7 +38,7 @@ def main(argv):
     return
 
 def usage():
-    print 'This is how we roll... lolz'
+    print 'Usage: python UDPServer.py -u URL'
     return
 
 def sender(): # sends until something changes exit to 1
