@@ -25,7 +25,7 @@ def main(argv):
     global url
     try:
         opts, args = getopt.getopt(argv, "hu", ["help", "URL="])
-    except getopt.Getopterror:
+    except getopt.GetoptError:
         usage()
         sys.exit(2)
     for opt, arg in opts:
