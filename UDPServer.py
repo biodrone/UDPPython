@@ -50,6 +50,7 @@ def sender(): # sends until something changes exit to 1
         sockS.sendto(MESSAGE, (UDP_IP_S, UDP_PORT_S))
         time.sleep(1)
     return
+
 def listener():
     global bots
     global exit
@@ -64,6 +65,7 @@ def listener():
         workers += 1
     exit = 1
     return
+    
 def checker(): ## TODO: Accept a URL as input maybe?
     while exit == 0:
         print 'Parsing...'
