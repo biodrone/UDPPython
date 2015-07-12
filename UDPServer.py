@@ -3,6 +3,7 @@
 #!/usr/bin/python
 
 import sys
+import getopt
 import threading
 import Queue
 import socket
