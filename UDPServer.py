@@ -37,7 +37,7 @@ def main(argv):
             url = arg
     return
 
-def useage():
+def usage():
     print 'This is how we roll... lolz'
     return
 
@@ -65,7 +65,7 @@ def listener():
         workers += 1
     exit = 1
     return
-    
+
 def checker(): ## TODO: Accept a URL as input maybe?
     while exit == 0:
         print 'Parsing...'
