@@ -4,6 +4,7 @@
 
 import sys
 import getopt
+import argpasre
 import threading
 import Queue
 import socket
@@ -24,21 +25,13 @@ url = "http://176.31.191.50/index.html"
 
 def main(argv):
     global url
-    try:
-        opts, args = getopt.getopt(argv, "hu", ["help", "URL="])
-    except getopt.GetoptError:
-        usage()
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt in ("-h", "--help"):
-            usage()
-            sys.exit()
-        elif opt in ("-u", "--URL"):
-            url = arg
-    return
 
-def usage():
-    print 'Usage: python UDPServer.py -u URL'
+    parser = argparse.ArgumentParser(usage='Break all the things')
+    parser.add_argument('URL', help='URL to take config from')
+    parser.add_argument('-s', '--server', help='Run the script in server mode', action='store_true')
+
+    args = parser.parse_args()
+    url = args.URL
     return
 
 def sender(): # sends until something changes exit to 1
