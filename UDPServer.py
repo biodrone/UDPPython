@@ -13,7 +13,7 @@ UDP_PORT_S = 13337
 UDP_IP_R = "127.0.0.1"
 UDP_PORT_R = 13338
 MESSAGE = 0
-workers = 0
+bots = 0
 exit = 0
 cmd = 1
 
@@ -27,16 +27,16 @@ def sender(): # sends until something changes exit to 1
         time.sleep(1)
     return
 def listener():
-    global workers
+    global bots
     global exit
-    while workers <= 3:
+    while bots <= 3:
         print 'Listening...'
         sockR = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sockR.bind((UDP_IP_R, UDP_PORT_R))
 
         data, addr = sockR.recvfrom(1024) # buffer size is 1024 bytes
         sockR.close()
-        print "New Worker:", data
+        print "New Bot:", data
         workers += 1
     exit = 1
     return
