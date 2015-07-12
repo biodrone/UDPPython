@@ -16,7 +16,7 @@ UDP_IP_S = "127.0.0.1"
 UDP_PORT_S = 13337
 UDP_IP_R = "127.0.0.1"
 UDP_PORT_R = 13338
-MESSAGE = 0
+MESSAGE = "TEMP"
 bots = 0
 exit = 0
 cmd = 1
@@ -78,14 +78,15 @@ def checker(): ## TODO: Accept a URL as input maybe?
         time.sleep(10)
     return
 
+def threads():
+    s = threading.Thread(name='Sender', target=sender)
+    l = threading.Thread(name='Listener', target=listener)
+    c = threading.Thread(name='Checker', target=checker)
+
+    c.start()
+    time.sleep(2) # give the parser a hot second
+    s.start()
+    l.start()
+
 if __name__ == "__main__":
     main(sys.argv[1:])
-
-s = threading.Thread(name='Sender', target=sender)
-l = threading.Thread(name='Listener', target=listener)
-c = threading.Thread(name='Checker', target=checker)
-
-c.start()
-time.sleep(2) # give the parser a hot second
-s.start()
-l.start()
