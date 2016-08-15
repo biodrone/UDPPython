@@ -28,7 +28,7 @@ def main(argv):
 
     parser = argparse.ArgumentParser(usage='Break all the things')
     parser.add_argument('URL', help='URL to take config from')
-    choose = parser.add_subparser('cliserv')
+    cliserv = parser.add_mutually_exclusive_group(required=True)
     cliserv.add_argument('-s', '--server', help='Run the script in server mode', action='store_true')
     cliserv.add_argument('-c', '--client', help='Run the script in client mode', action='store_true')
 
